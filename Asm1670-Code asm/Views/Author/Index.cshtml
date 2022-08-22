@@ -1,0 +1,43 @@
+﻿@model ICollection<Author>
+
+<div class="container col-md-6 text-center mt-3">
+@if (@TempData["Message"] != null) {
+  <p class="alert alert-danger">@TempData["Message"]</p>
+}
+<table class="table table-bordered">
+    <tr>
+        <th colspan="2" class="h3 bg-light text-success">Author List</th>
+        <th class="col-md-4">
+                <a class="btn btn-primary" asp-controller="Author" asp-action="Create">
+                    Add Author
+                </a>
+            </th>
+    </tr>
+
+    <tr>
+        <th>Author Id</th>
+        <th>Author Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var author in Model)
+    {
+        <tr>
+            <td>@author.Id</td>
+            <td>
+                <a class="" asp-controller="Author" asp-action="Detail" asp-route-id="@author.Id">
+                    @author.AuthorName
+                </a>
+            </td>
+            <td>
+                <a class="" asp-controller="Author" asp-action="Edit" asp-route-id="@author.Id">
+                    Edit
+                </a>
+                <a class="" asp-controller="Author" asp-action="Delete" asp-route-id="@author.Id"
+               onclick="    return confirm('Are you sure to delete this Category ?');">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+</div>

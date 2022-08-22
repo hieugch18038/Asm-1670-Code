@@ -1,0 +1,65 @@
+﻿@model ICollection<Asm1670.Models.Book>
+
+<div class="container text-center mt-3">
+    @if (@TempData["Success"] != null)
+    {
+        <p class="alert alert-danger">@TempData["Success"]</p>
+    }
+    <table class="table table-bordered">
+        <tr>
+            <th colspan="7" class="h3 bg-light text-success">List Book in Store</th>
+        </tr>
+        <tr>
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Decription</th>
+            <th>Book Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Name</td>
+                <td>@book.Description</td>
+                <td>
+                    <a class="font-weight-bold" asp-controller="Book" asp-action="Detail" asp-route-id="@book.Id">
+                        <img src="@book.Image" width="100" height="100">
+                    </a>
+                </td>
+                <td>@book.Price</td>
+                <td>
+                    >@if (book.Quantity == 0)
+                    {
+                    <div class="card-subtitle">
+                        <p class="text text-danger h2">Out of stock</p>
+                    </div>
+                        }
+                        else
+                        {
+                            <div class="card-subtitle">
+                                <h5 class="text text-danger">In-stock: @book.Quantity</h5>
+                            </div>
+                            
+                            
+                    }
+                    <td>
+                        <div class="card-footer">
+                                <form asp-controller="Cart" asp-action="Make">
+                                    <input type="hidden" name="id" value="@book.Id" />
+                                    <input class="form-control" type="number" name="quantity" required min="1" max="@book.Quantity">
+                                    <div class="form-group mt-3">
+                                        <input type="submit" class="btn btn-success" value="Make order"
+                                        onclick="    return confirm('Are you sure to order this mobile ?');"
+                                        />
+                                    </div>
+                                </form>
+                            </div>
+                    </td>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

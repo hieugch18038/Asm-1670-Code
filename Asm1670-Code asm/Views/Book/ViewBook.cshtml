@@ -1,0 +1,53 @@
+﻿
+@model ICollection<Asm1670.Models.Book>
+
+<div class="container col-md-8 text-center mt-3">
+    <h1 class="text text-primary">Book List</h1>
+    <p>Welcome to Our Book Store</p>
+    <p>Add New Book</p>
+    <a class="btn btn-primary" asp-controller="Book" asp-action="Create">
+        Add
+    </a>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Decription</th>
+            <th>Book Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Author</th>
+            <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Name</td>
+                    <td>@book.Description</td>
+                    <td>
+                    <a class="font-weight-bold" asp-controller="Book" asp-action="Detail" asp-route-id="@book.Id">
+                        <img src="@book.Image" width="100" height="100">
+                    </a>
+                    </td>
+                    <td>@book.Price</td>
+                    <td>@book.Quantity</td>
+                    <td>@book.Author</td>
+                    <td>
+                        <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id">
+                            <img src="https://gogeticon.net/files/2565735/ff3fa44f1e75c25cd7b11bf8a8392d74.png" width="40" height="40" />
+                        </a>
+                        <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id"
+                           onclick="return confirm('Are you sure to delete this Order ?')">
+                            <img src="https://tips.typeapp.com/assets/folder_trash.png" width="40" height="40" />
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

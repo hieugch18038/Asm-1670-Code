@@ -1,0 +1,41 @@
+﻿@model ICollection<Asm1670.Models.Cart>
+
+    <div class="container col-md-8 text-center mt-3">
+    <h1 class="text text-primary">Book List</h1>
+    <p>Welcome to Our Book Store</p>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Book Id</th>
+                <th>Mail</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Model)
+            {
+                <tr>
+                    <td>@cart.Id</td>
+                    <td>@cart.BookId</td>
+                    <td>@cart.Email</td>
+                    <td>@cart.OrderQuantity</td>
+                    <td>@cart.OrderPrice</td>
+                    <td>@cart.OrderDate</td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Store Owner"))
+                    {
+                        <td>
+                            <a asp-controller="Cart" asp-action="Delete" asp-route-id="@cart.Id"
+                           onclick="return confirm('Are you sure to delete?')">
+                                Delete
+                            </a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,34 @@
+﻿@model ICollection<Request>
+
+<div class="container col-md-6 text-center mt-3">
+@if (@TempData["Message"] != null) {
+  <p class="alert alert-danger">@TempData["Message"]</p>
+}
+<table class="table table-bordered">
+    <tr>
+        <th colspan="2" class="h3 bg-light text-success">Request List</th>
+    </tr>
+    <tr>
+        <th>Request ID</th>
+        <th>Request Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var Request in Model)
+    {
+        <tr>
+            <td>@Request.Id</td>
+            <td>@Request.RequestName</td>
+            <td>
+                <a type="submit" class="" asp-controller="Request" asp-action="Approve"
+                onclick="    return confirm('Are you sure to Approve this Category ?');" asp-route-id ="@Request.Id">
+                    Approve
+                </a>
+                <a type="submit" class="" asp-controller="Request" asp-action="Reject" asp-route-id="@Request.Id"
+                onclick="    return confirm('Are you sure to Reject this Category ?');">
+                    Reject
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+</div>

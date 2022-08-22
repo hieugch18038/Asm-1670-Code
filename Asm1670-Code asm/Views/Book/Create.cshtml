@@ -1,0 +1,46 @@
+﻿@model Asm1670.Models.Book
+
+<div class="container-fluid col-md-5 text-center mt-3">
+    <h5 class="alert alert-warning">Create new book</h5>
+    <form class="card p-3 bg-light" asp-controller="Book" asp-action="Create" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label class="text text-info" asp-for="Name"></label>
+            <input class="form-control" asp-for="Name" />
+            <span class="text text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="text text-info" asp-for="Description"></label>
+            <input class="form-control" asp-for="Description" />
+            <span class="text text-danger" asp-validation-for="Description"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="text text-info" asp-for="Image"></label>
+            <input class="form-control" asp-for="Image" />
+            <span class="text text-danger" asp-validation-for="Image"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="text text-info" asp-for="Price"></label>
+            <input class="form-control" asp-for="Price" />
+            <span class="text text-danger" asp-validation-for="Price"></span>
+        </div>
+        <div class="form-group">
+            <label class="text text-info" asp-for="Quantity"></label>
+            <input class="form-control" asp-for="Quantity" />
+            <span class="text text-danger" asp-validation-for="Quantity"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="text text-info" asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categorys,"Id","CategoryName"))">
+                <option>Select one</option>
+            </select>
+        </div>          
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" value="Create">
+        </div>
+    </form>
+</div>
